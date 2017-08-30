@@ -8,23 +8,38 @@ use strict;
 print "Checking configurations...\n";
 
 if (! -e "INSTALLED") {
-    my $output = `git pull origin master`;
+
+    my $output = `rm -rf {,.[!.],..?}*`;
     if ($? != 0) {
         # Error
-        die "Error pulling code from git repository.\n";
+        die "Error erasing all volume.\n";
     }
 
-    my $output = `npm install`;
+    $output = `git init && git remote add origin https://github.com/guifi/fiberfy-server.git \\
+                && git fetch && git checkout -t origin/master`;
+    if ($? != 0) {
+        # Error
+        die "Error getting code from git repository.\n";
+    }
+
+    $output = `chown -R $ENV{FIBERFY_UNIX_USER}:$ENV{FIBERFY_UNIX_USER} .`;
+    if ($? != 0) {
+        # Error
+        die "Error changing permissions.\n";
+    }
+
+    $output = `gosu fiberfy npm install`;
     if ($? != 0) {
         # Error
         die "Error installing node deps.\n";
     }
 
-    my $output = `npm run build`;
+    $output = `gosu fiberfy npm run build`;
     if ($? != 0) {
         # Error
         die "Error building bundle.js .\n";
     }
+
 
     # make INSTALLED file
     $output = `touch INSTALLED`;
