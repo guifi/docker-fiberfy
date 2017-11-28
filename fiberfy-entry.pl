@@ -15,8 +15,14 @@ if (! -e "INSTALLED") {
         die "Error erasing all volume.\n";
     }
 
+    $output = `npm install sails -g`;
+    if ($? != 0) {
+        # Error
+        die "Error installing sails.\n";
+    }
+
     $output = `git init && git remote add origin https://github.com/guifi/fiberfy-server.git \\
-                && git fetch && git checkout -t origin/master`;
+                && git fetch && git checkout -t origin/sails`;
     if ($? != 0) {
         # Error
         die "Error getting code from git repository.\n";
