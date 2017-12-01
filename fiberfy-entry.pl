@@ -28,7 +28,7 @@ if (! -e "INSTALLED") {
         die "Error getting code from git repository.\n";
     }
 
-    $output = `chown -R $ENV{FIBERFY_UNIX_USER}:$ENV{FIBERFY_UNIX_USER} . && chmod -R o+rw .`;
+    $output = `chown -R $ENV{FIBERFY_UNIX_USER}:$ENV{FIBERFY_UNIX_USER} . && chmod -R o+rw . && chmod -R g+rw .`;
     if ($? != 0) {
         # Error
         die "Error changing permissions.\n";
