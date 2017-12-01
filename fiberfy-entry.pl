@@ -21,14 +21,14 @@ if (! -e "INSTALLED") {
         die "Error installing sails.\n";
     }
 
-    $output = `git init && git remote add origin https://github.com/guifi/fiberfy-server.git \\
-                && git fetch && git checkout -t origin/sails`;
+    $output = `git init && git remote add origin $ENV{FIBERFY_GIT_REPO} \\
+                && git fetch && git checkout -t origin/$ENV{FIBERFY_GIT_BRANCH}`;
     if ($? != 0) {
         # Error
         die "Error getting code from git repository.\n";
     }
 
-    $output = `chown -R $ENV{FIBERFY_UNIX_USER}:$ENV{FIBERFY_UNIX_USER} .`;
+    $output = `chown -R $ENV{FIBERFY_UNIX_USER}:$ENV{FIBERFY_UNIX_USER} . && chmod -R o+rw .`;
     if ($? != 0) {
         # Error
         die "Error changing permissions.\n";

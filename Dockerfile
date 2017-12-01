@@ -9,6 +9,8 @@ LABEL maintainer="roger.garcia@guifi.net"
 
 ENV NODE_ROOT_DIR /usr/share/node
 ENV FIBERFY_UNIX_USER fiberfy
+ENV FIBERFY_GIT_REPO https://github.com/guifi/fiberfy-server.git
+ENV FIBERFY_GIT_BRANCH sails
 
 RUN apt-get update && apt-get dist-upgrade -y \
   && apt-get install -y curl wget git gnupg gosu python pkg-config \
