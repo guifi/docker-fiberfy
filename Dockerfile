@@ -20,8 +20,12 @@ RUN apt-get update && apt-get dist-upgrade -y \
   && apt-get autoremove \
   && rm -rf /var/lib/apt/lists/*
 
+# Installing nodejs
 RUN curl -sL https://deb.nodesource.com/setup_6.x | xargs -0 bash -c \
   && apt-get install -y nodejs
+
+# Installing sails globally
+RUN npm install sails -g
 
 # Preparing development dir
 RUN mkdir -p /usr/share/node/

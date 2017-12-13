@@ -4,6 +4,7 @@
 use warnings;
 use strict;
 
+sleep 15; # We should wait for mariadb container being ready
 
 print "Checking configurations...\n";
 
@@ -13,12 +14,6 @@ if (! -e "INSTALLED") {
     if ($? != 0) {
         # Error
         die "Error erasing all volume.\n";
-    }
-
-    $output = `npm install sails -g`;
-    if ($? != 0) {
-        # Error
-        die "Error installing sails.\n";
     }
 
     $output = `git init && git remote add origin $ENV{FIBERFY_GIT_REPO} \\
