@@ -10,7 +10,7 @@ print "Checking configurations...\n";
 
 if (! -e "INSTALLED") {
 
-    my $output = `rm -rf {,.[!.],..?}*`;
+    my $output = `rm -rf ./* .[^.]* ..?*`;
     if ($? != 0) {
         # Error
         die "Error erasing all volume.\n";

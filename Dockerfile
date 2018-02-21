@@ -27,6 +27,9 @@ RUN curl -sL https://deb.nodesource.com/setup_6.x | xargs -0 bash -c \
 # Installing sails globally
 RUN npm install sails -g
 
+# Installing database waterline-auto tool
+RUN npm install waterline-auto -g
+
 # Preparing development dir
 RUN mkdir -p /usr/share/node/
 
