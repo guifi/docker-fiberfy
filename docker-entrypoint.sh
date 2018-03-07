@@ -1,3 +1,3 @@
 #!/bin/bash
 perl /fiberfy-entry.pl
-gosu fiberfy sails lift
+/bin/bash -c "$*"

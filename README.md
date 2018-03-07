@@ -12,7 +12,7 @@ And that should be enough to run our image
 If you want to work with this version of guifi fiberfy tool you should clone this repository inside a development directory with writing permissions:
 
 ```
-docker run -it -p 1337:1337 -v "$PWD"/fiberfy:/usr/share/node/fiberfy guifi/fiberfy:sails
+docker run -it -p 1337:1337 -v "$PWD"/fiberfy:/usr/share/node/fiberfy guifi/fiberfy:sails gosu fiberfy sails lift
 ```
 
 This command runs guifi/fiberfy container with a persistent volume mounted inside ./fiberfy/ folder. Fiberfy is bind in localhost port 3000.

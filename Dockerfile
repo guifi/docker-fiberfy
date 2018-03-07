@@ -51,3 +51,5 @@ WORKDIR ${NODE_ROOT_DIR}/fiberfy
 EXPOSE 3000
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
+CMD ["/bin/bash"]
