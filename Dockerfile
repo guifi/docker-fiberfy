@@ -9,6 +9,8 @@ LABEL maintainer="roger.garcia@guifi.net"
 
 ENV NODE_ROOT_DIR /usr/share/node
 ENV FIBERFY_UNIX_USER fiberfy
+ENV FIBERFY_USER_ID 1000
+ENV FIBERFY_USER_GID 1000
 ENV FIBERFY_GIT_REPO https://github.com/guifi/fiberfy-server.git
 ENV FIBERFY_GIT_BRANCH sails
 
@@ -34,8 +36,14 @@ RUN npm install waterline-auto -g
 RUN mkdir -p /usr/share/node/
 
 
-# Creating UNIX User for fiberfy (security reasons)
-RUN groupadd --system $FIBERFY_UNIX_USER && useradd --system --gid $FIBERFY_UNIX_USER $FIBERFY_UNIX_USER --create-home
+# Creating UNIX User for development (security reasons)
+RUN groupadd --gid "${FIBERFY_USER_GID}" "${FIBERFY_UNIX_USER}" && \
+    useradd \
+      --uid ${FIBERFY_USER_ID} \
+      --gid ${FIBERFY_USER_GID} \
+      --create-home \
+      --shell /bin/bash \
+      ${FIBERFY_UNIX_USER}
 
 # Define Volume for Drupal
 VOLUME ${NODE_ROOT_DIR}/fiberfy
@@ -45,6 +53,9 @@ VOLUME ${NODE_ROOT_DIR}/fiberfy
 COPY ./docker-entrypoint.sh /
 COPY ./fiberfy-entry.pl /
 
+# Copying script for setting userid and gid (host)
+COPY user-mapping.sh /
+RUN  chmod u+x user-mapping.sh
 
 WORKDIR ${NODE_ROOT_DIR}/fiberfy
 
