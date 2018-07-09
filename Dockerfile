@@ -23,7 +23,7 @@ RUN apt-get update && apt-get dist-upgrade -y \
   && rm -rf /var/lib/apt/lists/*
 
 # Installing nodejs
-RUN curl -sL https://deb.nodesource.com/setup_6.x | xargs -0 bash -c \
+RUN curl -sL https://deb.nodesource.com/setup_8.x | xargs -0 bash -c \
   && apt-get install -y nodejs
 
 # Installing sails globally
@@ -60,6 +60,7 @@ RUN  chmod u+x user-mapping.sh
 WORKDIR ${NODE_ROOT_DIR}/fiberfy
 
 EXPOSE 3000
+EXPOSE 9229
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
