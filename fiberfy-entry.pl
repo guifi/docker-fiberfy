@@ -29,16 +29,10 @@ if (! -e "INSTALLED") {
         die "Error changing permissions.\n";
     }
 
-    $output = `gosu fiberfy npm install`;
+    $output = `gosu fiberfy ./docker-install.sh`;
     if ($? != 0) {
         # Error
-        die "Error installing node deps.\n";
-    }
-
-    $output = `gosu fiberfy npm run build`;
-    if ($? != 0) {
-        # Error
-        die "Error building bundle.js .\n";
+        die "Error running installation script.\n";
     }
 
 
