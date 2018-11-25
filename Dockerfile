@@ -15,8 +15,7 @@ ENV FIBERFY_GIT_REPO https://github.com/guifi/fiberfy-server.git
 ENV FIBERFY_GIT_BRANCH master
 
 RUN apt-get update && apt-get dist-upgrade -y \
-  && apt-get install -y curl wget git gnupg gosu python pkg-config \
-  libcairo2-dev libjpeg62-turbo-dev libpango1.0-dev libgif-dev \
+  && apt-get install -y curl wget git gnupg gosu pkg-config \
   mariadb-client \
   && apt-get clean \
   && apt-get autoremove \
